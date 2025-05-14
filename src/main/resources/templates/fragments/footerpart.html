@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+</head>
+
+<body>
+
+	<th:block th:fragment="footerpart">
+	<!--/*
+	We allow broken URLs on development phase since the page is not deployed to the
+	target domain environment. Once fully implemented, footer relative URLs should work.
+	*/-->
+
+		<div style="margin-top: 400px;">
+
+			<div th:if="${@environment.getActiveProfiles()[0] == 'dev'}">
+				<p>Dev note: This footer is fetched from an external URL and presented only for demonstration purposes.</p>
+				<p>Be aware: External URLs presented in the footer may be broken/relative to the original domain.</p>
+			</div>
+
+			<footer th:replace="${@ExternalUrl.getUrl('https://fjordtek.com/')} ? ~{https://fjordtek.com/ :: footer} : _"></footer>
+			<!--/* [//div[@id='footer']]"  */-->
+
+		</div>
+
+		<link rel="stylesheet" type="text/css" href="https://fjordtek.com/css/style.css">
+		<link rel="stylesheet" type="text/css" href="https://fjordtek.com/css/style2.css">
+		<link rel="stylesheet" type="text/css" href="https://fjordtek.com/css/fontawesome-all.css?v2.9.3">
+		<link rel="stylesheet" type="text/css" href="https://fjordtek.com/css/footer-and-social.css?v2.9.3">
+
+	</th:block>
+</body>
+</html>
